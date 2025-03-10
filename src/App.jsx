@@ -2,6 +2,9 @@ import { BrowserRouter, Route, Navigate, Routes, useNavigate, Outlet } from 'rea
 import HomeComponent from './component/HomeComponent';
 import MainComponent from './component/MainComponent';
 
+import 'primeicons/primeicons.css';
+        
+
 function App() {
 
   return (
