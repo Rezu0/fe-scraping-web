@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import NavbarComponent from "./navbar/NavbarComponent";
 import { Outlet } from "react-router-dom";
+import { Toaster } from "sonner";
 
 function HomeComponent() {
   return (
@@ -23,6 +24,7 @@ function HomeComponent() {
 
       <div className="container text-white mx-auto px-4">
         <Outlet />
+        <Toaster position="bottom-right" />
       </div>
 
 
