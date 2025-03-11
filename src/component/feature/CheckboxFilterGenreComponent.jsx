@@ -33,11 +33,11 @@ function CheckboxFilterGenreComponent() {
               id={`default-checkbox-${index}`}
               type="checkbox" 
               value="" 
-              className="w-4 h-4 accent-adultdesu-navbartext bg-gray-100 border-gray-300  focus:ring-adultdesu-navbartext"
+              className="w-4 h-4 accent-adultdesu-navbartext bg-gray-100 border-gray-300  focus:ring-adultdesu-navbartext cursor-pointer"
             />
             <label 
               htmlFor={`default-checkbox-${index}`} 
-              className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 break-words"
+              className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 break-words cursor-pointer"
             >
               {item.categories}
             </label>
