@@ -1,17 +1,34 @@
-import { Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Outlet, useSearchParams } from "react-router-dom";
+import { Paginator } from "primereact/paginator";
+
 import FilterGlobalComponent from "./feature/FilterGlobalComponent";
 import MainCardImageComponent from "./card/MainCardImageComponent";
-import { Paginator } from "primereact/paginator";
-import { useState } from "react";
+import { formatNumber } from '../utils/number/handlerNumber';
 
 function MainComponent() {
+  const [isSearchParams, setSearchParams] = useSearchParams();
   const [first, setFirst] = useState(0);
   const [rows, setRows] = useState(32);
+  const [isCardData, setCardData] = useState(null);
+
+  useEffect(() => {
+    const pageFromQuery = isSearchParams.get('page');
+    if (pageFromQuery) {
+      setFirst((pageFromQuery - 1) * rows);
+    }
+  }, [isSearchParams, rows])
 
   const onPageChange = (event) => {
+    isSearchParams.set('page', event.page + 1);
+    setSearchParams(isSearchParams);
     setFirst(event.first);
     setRows(event.rows);
   };
+
+  const handleCardData = (data) => {
+    setCardData(data);
+  }
 
   return (
     <>
@@ -19,7 +36,7 @@ function MainComponent() {
 
       <div className="flex flex-wrap justify-between items-center gap-2">
         <div className="p-2 text-start uppercase text-adultdesu-navbartext text-lg md:text-2xl w-1/2">
-          All Adultdesu HD Videos
+          All Adultdesu HD Videos { formatNumber(isCardData?.totalData) }+
         </div>
         <div>
           <button 
@@ -34,7 +51,9 @@ function MainComponent() {
 
       <div className="flex justify-center items-center">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          <MainCardImageComponent />          
+          <MainCardImageComponent 
+            sendDataToParent={handleCardData}
+          />          
         </div>
       </div>
 
@@ -42,7 +61,7 @@ function MainComponent() {
         <Paginator 
           first={first} 
           rows={rows} 
-          totalRecords={57164} 
+          totalRecords={isCardData?.totalData} 
           onPageChange={onPageChange}
         />
       </div>
