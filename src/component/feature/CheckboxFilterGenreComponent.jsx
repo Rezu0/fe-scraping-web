@@ -14,7 +14,7 @@ function CheckboxFilterGenreComponent() {
         setCategoriesList(response?.data)
         return;
       } catch (err) {
-        toast('An error occurred while fetching mock categories (err1)');
+        toast('An error occurred while fetching mock categories (err1 GET)');
         return;
       }
     }
