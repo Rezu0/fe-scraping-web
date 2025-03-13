@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { mockApiCategoriesFilter } from '../../utils/mockAPI/mockAPICategories';
 import { toast } from "sonner";
+import { useSearchParams } from "react-router-dom";
 
 function CheckboxFilterGenreComponent() {
   const [isCategoriesList, setCategoriesList] = useState(null);
+  const [isCheckedGenre, setCheckedGenre] = useState([]);
+  const [isSearchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -22,6 +25,26 @@ function CheckboxFilterGenreComponent() {
     fetchCategories(); // CALL FUNCTION fetchCategories
   }, [setCategoriesList])
 
+  useEffect(() => {
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+
+      (isCheckedGenre.length === 0) ? newParams.delete('genre') : newParams.set('genre', isCheckedGenre.toString());
+
+      return newParams;
+    });
+  }, [isCheckedGenre, isSearchParams, setSearchParams]);
+
+  const changeTextLowercase = (text) => text.toLowerCase();
+
+  const handlerCheckedBox = (event) => {
+    const { value, checked } = event.target;
+
+    setCheckedGenre((prevChecked) =>
+      checked ? [...prevChecked, value] : prevChecked.filter((item) => item !== value)
+    );
+  };
+
   return (
     <>
       {isCategoriesList?.map((item, index) => (
@@ -32,7 +55,9 @@ function CheckboxFilterGenreComponent() {
             <input 
               id={`default-checkbox-${index}`}
               type="checkbox" 
-              value="" 
+              value={changeTextLowercase(item.categories)}
+              checked={isCheckedGenre.includes(changeTextLowercase(item.categories))}
+              onChange={handlerCheckedBox}
               className="w-4 h-4 accent-adultdesu-navbartext bg-gray-100 border-gray-300  focus:ring-adultdesu-navbartext cursor-pointer"
             />
             <label 
