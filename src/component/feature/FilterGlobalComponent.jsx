@@ -37,7 +37,7 @@ function FilterGlobalComponent() {
             <div
               className={classNames(
                 isSortBy ? "translate-y-0 opacity-100 pointer-events-auto" : "translate-y-5 opacity-0 pointer-events-none",
-                "absolute top-full left-1/2 lg:left-1/10 -translate-x-1/2 bg-black border border-adultdesu-navbartext py-2 px-4 mt-1 rounded-md min-w-[300px] w-full max-w-xs sm:min-w-sm md:min-w-md lg:min-w-md text-sm text-start transition-all duration-300"
+                "absolute top-full left-1/2 lg:left-1/10 -translate-x-1/2 bg-black border border-adultdesu-navbartext py-2 px-4 mt-1 rounded-md min-w-[300px] w-full max-w-xs sm:min-w-sm md:min-w-md lg:min-w-md text-sm text-start transition-all duration-300 z-50"
               )}
             >
               <div className="flex justify-between text-md uppercase underline underline-offset-2 decoration-adultdesu-navbartext">
@@ -71,7 +71,7 @@ function FilterGlobalComponent() {
             {/* BOX UNTUK FILTER GENRE */}
             <div className={classNames(
               isFilterGenre ? "translate-y-0 opacity-100 pointer-events-auto" : "translate-y-5 opacity-0 pointer-events-none",
-              "absolute top-full right-5 bg-black border border-adultdesu-navbartext py-2 px-4 mt-1 rounded-md min-w-[300px] w-full max-w-xs sm:min-w-sm md:min-w-md lg:min-w-lg text-sm text-start transition-all duration-300"
+              "absolute top-full right-5 bg-black border border-adultdesu-navbartext py-2 px-4 mt-1 rounded-md min-w-[300px] w-full max-w-xs sm:min-w-sm md:min-w-md lg:min-w-lg text-sm text-start transition-all duration-300 z-50"
             )}>
               <div className="flex justify-between text-md uppercase underline underline-offset-2 decoration-adultdesu-navbartext">
                 <span className="text-start">Filter Genre</span>
@@ -85,6 +85,15 @@ function FilterGlobalComponent() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 my-2 max-h-60 overflow-y-auto custom-scrollbar">
                 <CheckboxFilterGenreComponent />
+              </div>
+
+              <div className="flex justify-start my-2">
+                <button 
+                  type="button" 
+                  className="px-3 py-2 text-md font-medium text-center text-white bg-adultdesu-navbartext rounded-lg transition-transform active:scale-75 cursor-pointer"
+                >
+                  Apply Filter
+                </button>
               </div>
             </div>
             {/* END OF BOX GENRE */}
