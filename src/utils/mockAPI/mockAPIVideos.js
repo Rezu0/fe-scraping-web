@@ -1,6 +1,6 @@
 import { API_URL } from '../secrets.json';
 
-export async function mockAPIVideos({ limit = null, page = null  }) {
+export async function mockAPIVideos({ limit = null, page = null, tags = null  }) {
   try {
     const requestOptions = {
       method: 'GET',
