@@ -1,10 +1,13 @@
 import { classNames } from "primereact/utils";
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import CheckboxFilterGenreComponent from "./CheckboxFilterGenreComponent";
 import CheckBoxSortByComponent from "./CheckboxSortByComponent";
 
 function FilterGlobalComponent() {
   const [isFilterGenre, setIsFilterGenre] = useState(false);
+  const [isSearchParams, setSearchParams] = useSearchParams();
+  const [isCheckedGenre, setCheckedGenre] = useState([]);
   const [isSortBy, setIsSortBy] = useState(false);
 
   const toggleFilter = (filterType) => {
@@ -16,6 +19,30 @@ function FilterGlobalComponent() {
       setIsSortBy(filterType === "sort");
     }
   };
+
+  const handlerDataFilterGenre = (data) => {
+    setCheckedGenre(data)
+  }
+
+  const handlerClickApply = () => {
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+
+      (isCheckedGenre.length === 0) ? newParams.delete('genre') : newParams.set('genre', isCheckedGenre.toString());
+
+      return newParams;
+    });
+  }
+
+  const handlerClickClearFilter = () => {
+    setCheckedGenre([]);
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+      newParams.delete('genre')
+
+      return newParams;
+    });
+  }
 
   return (
     <>
@@ -84,15 +111,26 @@ function FilterGlobalComponent() {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 my-2 max-h-60 overflow-y-auto custom-scrollbar">
-                <CheckboxFilterGenreComponent />
+                <CheckboxFilterGenreComponent 
+                  sendDataFilter={handlerDataFilterGenre}
+                  sendBackClear={isCheckedGenre}
+                />
               </div>
 
               <div className="flex justify-start my-2">
                 <button 
                   type="button" 
                   className="px-3 py-2 text-md font-medium text-center text-white bg-adultdesu-navbartext rounded-lg transition-transform active:scale-75 cursor-pointer"
+                  onClick={handlerClickApply}
                 >
                   Apply Filter
+                </button>
+                <button 
+                  type="button" 
+                  className="px-3 py-2 text-md font-medium text-center text-white underline decoration-adultdesu-navbartext transition-transform active:scale-75 cursor-pointer mx-2"
+                  onClick={handlerClickClearFilter}
+                >
+                  Clear Filter
                 </button>
               </div>
             </div>

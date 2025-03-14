@@ -14,6 +14,7 @@ function MainCardImageComponent({ sendDataToParent }) {
       setLoading(true);
       try {
         const page = searchParams.get('page') ?? 1;
+        const genre = searchParams.get('genre');
         const response = await mockAPIVideos({ page: page });
         if (!response.status) toast(response.message);
 
