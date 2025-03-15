@@ -69,14 +69,6 @@ function NavbarComponent() {
             <li>
               <a 
                 className="hover:text-adultdesu-navbartext hover:underline duration-500 cursor-pointer"
-                onClick={async () => await loadingBarState('movies')}
-              >
-                Movies
-                </a>
-            </li>
-            <li>
-              <a 
-                className="hover:text-adultdesu-navbartext hover:underline duration-500 cursor-pointer"
                 onClick={async () => await loadingBarState('categories')}
               >
                 Categories
