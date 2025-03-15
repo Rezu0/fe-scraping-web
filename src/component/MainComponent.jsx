@@ -9,8 +9,9 @@ import { formatNumber } from '../utils/number/handlerNumber';
 function MainComponent() {
   const [isSearchParams, setSearchParams] = useSearchParams();
   const [first, setFirst] = useState(0);
-  const [rows, setRows] = useState(32);
+  const [rows, setRows] = useState(35);
   const [isCardData, setCardData] = useState(null);
+  const [isGenreTag, setGenreTag] = useState([]);
 
   useEffect(() => {
     const pageFromQuery = isSearchParams.get('page');
@@ -18,6 +19,16 @@ function MainComponent() {
       setFirst((pageFromQuery - 1) * rows);
     }
   }, [isSearchParams, rows])
+
+  useEffect(() => {
+    const paramsQueryGenre = isSearchParams.get('genre');
+    if (paramsQueryGenre) {
+      const splitGenre = paramsQueryGenre.split(',');
+      setGenreTag((prev) => splitGenre);
+    } else {
+      setGenreTag([]);
+    }
+  }, [isSearchParams])
 
   const onPageChange = (event) => {
     isSearchParams.set('page', event.page + 1);
@@ -41,11 +52,22 @@ function MainComponent() {
         <div>
           <button 
             type="button"
-            className="hover:bg-adultdesu-navbartext duration-300 px-3 py-1 text-amber-50 text-sm rounded-sm cursor-pointer underline decoration-adultdesu-navbartext"
+            className="hover:bg-adultdesu-navbartext duration-300 px-3 py-1 text-amber-50 text-sm rounded-sm cursor-pointer underline decoration-adultdesu-navbartext transition-transform active:scale-75"
           >
             See all
           </button>
         </div>
+      </div>
+
+      <div className="flex flex-wrap justify-end my-5">
+        { isGenreTag?.map((item, index) => (
+          <div 
+            key={index}
+            className="bg-adultdesu-navbartext mx-1 text-xs py-2 px-3 rounded-lg"
+          >
+            {item}
+          </div>
+        )) }
       </div>
 
 

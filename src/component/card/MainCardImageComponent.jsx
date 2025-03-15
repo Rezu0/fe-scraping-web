@@ -14,8 +14,8 @@ function MainCardImageComponent({ sendDataToParent }) {
       setLoading(true);
       try {
         const page = searchParams.get('page') ?? 1;
-        const genre = searchParams.get('genre');
-        const response = await mockAPIVideos({ page: page });
+        const genreFilter = (searchParams.has('genre')) ? searchParams.get('genre').split(',') : '';
+        const response = await mockAPIVideos({ page: page, tags: genreFilter });
         if (!response.status) toast(response.message);
 
         setContentVideos(response?.data);
@@ -40,27 +40,33 @@ function MainCardImageComponent({ sendDataToParent }) {
           Loading...
         </div>
       ) : (
-        isContentVideos?.map((item, index) => (
-          <div 
-            key={index}
-            className="w-full max-w-xs shadow-md overflow-hidden group"
-          >
-            {/* Gambar */}
-            <img 
-              srcSet={item.image}
-              alt="Thumbnail"
-              className="w-full h-48 object-cover rounded-md hover:opacity-50 cursor-pointer duration-300"
-              loading="lazy"
-            />
-  
-            {/* Konten di Bawah Gambar */}
-            <div className="py-1">
-              <h3 className="text-md font-semibold text-adultdesu-navbartext line-clamp-2 group-hover:underline duration-300 cursor-pointer">{item.title}</h3>
-              <p className="text-sm text-gray-500 no-underline">{formatDateToString(item.created)}</p>
-              <p className="text-sm text-gray-500 no-underline">{ item.duration }</p>
+        isContentVideos && isContentVideos?.length > 0 ? (
+          isContentVideos?.map((item, index) => (
+            <div 
+              key={index}
+              className="w-full max-w-xs shadow-md overflow-hidden group"
+            >
+              {/* Gambar */}
+              <img 
+                srcSet={item.image}
+                alt="Thumbnail"
+                className="w-full h-48 object-cover rounded-md hover:opacity-50 cursor-pointer duration-300"
+                loading="lazy"
+              />
+    
+              {/* Konten di Bawah Gambar */}
+              <div className="py-1">
+                <h3 className="text-md font-semibold text-adultdesu-navbartext line-clamp-2 group-hover:underline duration-300 cursor-pointer">{item.title}</h3>
+                <p className="text-sm text-gray-500 no-underline">{formatDateToString(item.created)}</p>
+                <p className="text-sm text-gray-500 no-underline">{ item.duration }</p>
+              </div>
             </div>
+          ))
+        ) : (
+          <div className="w-full text-start text-2xl text-adultdesu-navbartext my-10">
+            Tidak ada videos
           </div>
-        ))
+        )
       )}
       
     </>
