@@ -1,3 +1,4 @@
+import { classNames } from "primereact/utils";
 import { useState } from "react";
 
 function CheckBoxSortByComponent() {
@@ -15,19 +16,18 @@ function CheckBoxSortByComponent() {
   };
 
   return (
-    <div className="flex flex-wrap gap-2">
-      {sortByList.map((item) => (
-        <div key={item.id}>
-          <button
+      sortByList.map((item) => (
+        <button
+            key={item.id}
             onClick={() => handleClick(item.id)}
-            className={`px-4 py-2 rounded-md text-sm font-medium border transition-all duration-300
-              ${selectedSort === item.id ? "bg-adultdesu-navbartext text-white border-adultdesu-navbartext" : "bg-white text-gray-900 border-gray-300 hover:bg-gray-200"}`}
+            className={classNames(
+              selectedSort === item.id ? "bg-adultdesu-navbartext text-white border-adultdesu-navbartext" : "bg-white text-gray-900 border-gray-300 hover:bg-gray-200",
+              "p-2 rounded-md text-xs border transition-all duration-300 cursor-pointer"
+            )}
           >
             {item.name}
           </button>
-        </div>
-      ))}
-    </div>
+      ))
   );
 }
 
