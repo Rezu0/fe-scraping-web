@@ -7,7 +7,7 @@ export async function mockAPIVideos({ limit = null, page = null, tags = null  })
       redirect: 'follow',
     };
 
-    const fetchingApi = await fetch(`${API_URL}/xtape/videos?page=${page}`, requestOptions);
+    const fetchingApi = await fetch(`${API_URL}/xtape/videos?page=${page}&tags=${tags}`, requestOptions);
     const responseData = await fetchingApi.json();
 
     if (responseData.status === 'fail' || responseData.status === 'error') return { status: false, message: responseData.message };
