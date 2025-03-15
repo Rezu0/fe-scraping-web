@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import NavbarComponent from "./navbar/NavbarComponent";
 import { Outlet } from "react-router-dom";
 import { Toaster } from "sonner";
+import FooterComponent from "./navbar/FooterComponent";
 
 function HomeComponent() {
   return (
@@ -32,7 +33,7 @@ function HomeComponent() {
         <Toaster position="bottom-right" />
       </div>
 
-
+      <FooterComponent />
     </>
   )
 }
