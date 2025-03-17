@@ -2,6 +2,7 @@
 
 @theme {
   --color-adultdesu-navbartext: #E97991;
+  --color-adultdesu-backgroundbox: #181818;
 }
 
 @layer utilities {
