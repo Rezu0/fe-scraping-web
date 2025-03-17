@@ -29,6 +29,7 @@ function CheckboxFilterGenreComponent({ sendDataFilter, sendBackClear }) {
     sendDataFilter(isCheckedGenre);
   }, [isCheckedGenre, sendDataFilter]);
 
+  // useEffect untuk menghandle query params genre
   useEffect(() => {
     if (isSearchParams.has('genre')) {
       const genreQueryParams = isSearchParams.get('genre').split(',');
@@ -40,16 +41,6 @@ function CheckboxFilterGenreComponent({ sendDataFilter, sendBackClear }) {
       setCheckedGenre([])
     }
   }, [isSearchParams, setCheckedGenre])
-
-  // useEffect(() => {
-  //   setSearchParams((prev) => {
-  //     const newParams = new URLSearchParams(prev);
-
-  //     (isCheckedGenre.length === 0) ? newParams.delete('genre') : newParams.set('genre', isCheckedGenre.toString());
-
-  //     return newParams;
-  //   });
-  // }, [isCheckedGenre, isSearchParams, setSearchParams]);
 
   const changeTextLowercase = (text) => text.toLowerCase();
 
