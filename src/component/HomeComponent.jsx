@@ -28,12 +28,16 @@ function HomeComponent() {
         <div className="bg-red-500 p-4 text-center">Kolom 3</div>
       </div> */}
 
-      <div className="container text-white mx-auto px-4">
-        <Outlet />
-        <Toaster position="bottom-right" />
+      <div className="flex flex-col min-h-screen">
+        <main className="flex-grow">
+          <div className="container text-white mx-auto px-4">
+            <Outlet />
+            <Toaster position="bottom-right" />
+          </div>
+          {/* Konten utama di sini */}
+        </main>
+        <FooterComponent />
       </div>
-
-      <FooterComponent />
     </>
   )
 }
