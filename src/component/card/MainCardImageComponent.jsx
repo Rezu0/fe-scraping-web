@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import { mockAPIVideos } from "../../utils/mockAPI/mockAPIVideos";
 import { formatDateToString } from '../../utils/date/handlerDate';
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
 
+import LoadingBar from "react-top-loading-bar";
+
 function MainCardImageComponent({ sendDataToParent }) {
+  const [isProgressBar, setIsProgressBar] = useState(0);
   const [isContentVideos, setContentVideos] = useState(null);
   const [isLoading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   
   useEffect(() => {
@@ -34,8 +38,35 @@ function MainCardImageComponent({ sendDataToParent }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setContentVideos, searchParams])
 
+  const loadingBarState = async (dataNavigate) => {
+    setIsProgressBar((prev) => prev + 40);
+
+    await new Promise((resolve, reject) => {
+      setTimeout(() => {
+        setIsProgressBar((prev) => prev + 10);
+        resolve()
+      }, 500)
+    })
+
+    await new Promise((resolve, reject) => {
+      setTimeout(() => {
+        setIsProgressBar((prev) => prev + 50);
+        resolve()
+      }, 500)
+    })
+
+    setTimeout(() => {
+      navigate(dataNavigate);
+    }, 100);
+  }
+
   return (
     <>
+      <LoadingBar 
+        color="#E97991"
+        progress={isProgressBar}
+        onLoaderFinished={() => setIsProgressBar(0)}
+      />
       {isLoading ? (
         <div className="w-full text-center text-adultdesu-navbartext">
           Loading...
@@ -46,6 +77,7 @@ function MainCardImageComponent({ sendDataToParent }) {
             <div 
               key={index}
               className="w-full max-w-xs shadow-md overflow-hidden group"
+              onClick={async () => await loadingBarState(`videos/${item.slug}`)}
             >
               {/* Gambar */}
               <img 
