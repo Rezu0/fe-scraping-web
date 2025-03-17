@@ -5,6 +5,7 @@ import { Paginator } from "primereact/paginator";
 import FilterGlobalComponent from "./feature/FilterGlobalComponent";
 import MainCardImageComponent from "./card/MainCardImageComponent";
 import { formatNumber } from '../utils/number/handlerNumber';
+import { classNames } from "primereact/utils";
 
 function MainComponent() {
   const [isSearchParams, setSearchParams] = useSearchParams();
@@ -12,6 +13,7 @@ function MainComponent() {
   const [rows, setRows] = useState(35);
   const [isCardData, setCardData] = useState(null);
   const [isGenreTag, setGenreTag] = useState([]);
+  const [isSortBy, setSortBy] = useState(null);
 
   useEffect(() => {
     const pageFromQuery = isSearchParams.get('page');
@@ -22,12 +24,10 @@ function MainComponent() {
 
   useEffect(() => {
     const paramsQueryGenre = isSearchParams.get('genre');
-    if (paramsQueryGenre) {
-      const splitGenre = paramsQueryGenre.split(',');
-      setGenreTag((prev) => splitGenre);
-    } else {
-      setGenreTag([]);
-    }
+    const paramsQuerySort = isSearchParams.get('sort');
+    setGenreTag(paramsQueryGenre ? paramsQueryGenre.split(',') : []);
+    setSortBy(paramsQuerySort ? paramsQuerySort : null);
+
   }, [isSearchParams])
 
   const onPageChange = (event) => {
@@ -45,17 +45,9 @@ function MainComponent() {
     <>
       <FilterGlobalComponent />
 
-      <div className="flex flex-wrap justify-between items-center gap-2">
+      <div className="grid grid-cols-1 items-center gap-2">
         <div className="p-2 text-start uppercase text-adultdesu-navbartext text-lg md:text-2xl w-1/2">
           All Adultdesu HD Videos { formatNumber(isCardData?.totalData) }+
-        </div>
-        <div>
-          <button 
-            type="button"
-            className="hover:bg-adultdesu-navbartext duration-300 px-3 py-1 text-amber-50 text-sm rounded-sm cursor-pointer underline decoration-adultdesu-navbartext transition-transform active:scale-75"
-          >
-            See all
-          </button>
         </div>
       </div>
 
@@ -68,6 +60,13 @@ function MainComponent() {
             {item}
           </div>
         )) }
+
+        <div className={classNames(
+          isSortBy ? 'inline-block' : 'hidden',
+          "bg-adultdesu-navbartext mx-1 text-xs py-2 px-3 rounded-lg"
+        )}>
+          Sort by: {isSortBy}
+        </div>
       </div>
 
 
