@@ -3,6 +3,7 @@ import HomeComponent from './component/HomeComponent';
 import MainComponent from './component/MainComponent';
 
 import 'primeicons/primeicons.css';
+import PageDetailVideosComponent from './component/PageDetailVideosComponent';
         
 
 function App() {
@@ -20,8 +21,12 @@ function App() {
               element={<MainComponent />}
             />
 
-          <Route path="videos" element={ <> <h1>ngeri banget</h1> <Outlet /> </> }>
-            <Route path="id" element={<h1 className='text-white'>Ini videos1</h1>} />
+          <Route 
+            path="videos" 
+          >
+            <Route
+              path=":slug"
+              element={<PageDetailVideosComponent />} />
           </Route>
             
           </Route>
