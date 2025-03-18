@@ -3,6 +3,7 @@
 @theme {
   --color-adultdesu-navbartext: #E97991;
   --color-adultdesu-backgroundbox: #181818;
+  --color-adultdesu-background-hover: #e76682;
 }
 
 @layer utilities {
