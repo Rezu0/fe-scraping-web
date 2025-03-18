@@ -51,17 +51,9 @@ function NavbarComponent() {
           {/* Menu Desktop */}
           <ul className="hidden lg:flex space-x-6 text-white uppercase font-semibold">
             <li>
-              <a
-                className="hover:text-adultdesu-navbartext hover:underline duration-500 cursor-pointer"
-                onClick={async () => await loadingBarState('/')}
-              >
-                Home
-              </a>
-            </li>
-            <li>
             <a
                 className="hover:text-adultdesu-navbartext hover:underline duration-500 cursor-pointer"
-                onClick={async () => await loadingBarState('videos')}
+                onClick={async () => await loadingBarState('/')}
               >
                 Videos
               </a>
