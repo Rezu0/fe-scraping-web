@@ -18,6 +18,7 @@ function PageDetailVideosComponent() {
   const { slug } = useParams();
   const [isDetailVideos, setDetailVideos] = useState(null);
   const [isServerVideo, setServerVideo] = useState([]);
+  const [isServerAcitve, setServerActive] = useState(null);
 
   useEffect(() => {
     const fetchDetailVideos = async () => {
@@ -28,6 +29,7 @@ function PageDetailVideosComponent() {
         setDetailVideos(response?.data);
         setServerVideo(
           [response?.data?.videoEmbedFirst, response?.data?.videoEmbedSecond].map((item) => item?.includes("vid.xtapes.to") ? NoVideoImage : item));
+        setServerActive(null)
         return;
       } catch (err) {
         toast('An error occurred while fetching mock Detail Videos (err1 GET)');
@@ -42,13 +44,14 @@ function PageDetailVideosComponent() {
       <Helmet>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Tonton pulugan ribu video berkualitas tinggi secara gratis! Nikmati streaming cepat tanpa buffering dengan koleksi Video 18+ HD terbaru. Temukan video favoritmu sekarang!" />
-        <meta name="keywords" content="streaming, 18+, bokep eropa, mia khalifa, bokep indonesia, video porno, adultdesu, adult, movie adult, netflix and chill, video eropa, video bokep, bokep streaming film dewasa, tontonan eksklusif, hiburan 18+, koleksi premium, video HD, film romantis, tayangan malam, video eksotis, streaming privat, konten khusus, film panas, adult streaming, video privat, nonton premium, film sensasi, hiburan malam, tontonan spesial, koleksi eksklusif, private movies, premium videos, film daring, tayangan khusus, high quality streaming, exclusive content, adult movies, entertainment 18+, private entertainment, premium collection"/>
+        <meta name="description" content={`${isDetailVideos?.title} - Tonton video berkualitas HD tanpa buffering. Streaming ${isDetailVideos?.title} terbaru hanya di Adultdesu! Cari video 18+ favoritmu? Streaming HD tanpa batas dengan koleksi terlengkap dan tercepat. Klik sekarang dan nikmati!`} />
         <meta name="robots" content="index, follow" />
-        <meta property="og:title" content="Watch Free HD Porn - Adultdesu" />
-        <meta property="og:description" content="Tonton pulugan ribu video berkualitas tinggi secara gratis! Nikmati streaming cepat tanpa buffering dengan koleksi Video 18+ HD terbaru. Temukan video favoritmu sekarang!" />
-        <meta property="og:url" content="https://adultdesu.tv" />
-        <title>Watch Free HD Porn - Adultdesu</title>
+        <meta property="og:title" content={`${isDetailVideos?.title} - Adultdesu`} />
+        <meta property="og:description" content={`${isDetailVideos?.title} - Tonton video berkualitas HD tanpa buffering. Streaming ${isDetailVideos?.title} terbaru hanya di Adultdesu! Cari video 18+ favoritmu? Streaming HD tanpa batas dengan koleksi terlengkap dan tercepat. Klik sekarang dan nikmati!`} />
+        <meta property="og:url" content={`https://adultdesu.tv/videos/${isDetailVideos?.slug}`} />
+        <meta name="keywords" content="streaming, 18+, bokep eropa, mia khalifa, bokep indonesia, video porno, adultdesu, adult, movie adult, netflix and chill, video eropa, video bokep, bokep streaming film dewasa, tontonan eksklusif, hiburan 18+, koleksi premium, video HD, film romantis, tayangan malam, video eksotis, streaming privat, konten khusus, film panas, adult streaming, video privat, nonton premium, film sensasi, hiburan malam, tontonan spesial, koleksi eksklusif, private movies, premium videos, film daring, tayangan khusus, high quality streaming, exclusive content, adult movies, entertainment 18+, private entertainment, premium collection"/>
+        <title>{isDetailVideos?.title ? `Adultdesu - ${isDetailVideos.title}` : "Adultdesu - Streaming HD"}</title>
+
         <link rel="canonical" href="https://www.example.com" />
       </Helmet>
       <div className="container mx-auto my-12">
@@ -61,9 +64,10 @@ function PageDetailVideosComponent() {
         <div className="grid grid-cols-12 gap-4">
 
           <div className="col-span-12 md:col-span-8 bg-adultdesu-backgroundbox py-3 px-5 rounded-sm">
+            {/* IFRAME VIDEO */}
             <div className="relative w-full pb-[56.25%] overflow-hidden rounded-sm">
                 <iframe
-                  src={isServerVideo[0]}
+                  src={!isServerAcitve ? isServerVideo[0] : isServerAcitve}
                   title={isDetailVideos?.title}
                   frameBorder="0"
                   allowFullScreen
@@ -71,10 +75,13 @@ function PageDetailVideosComponent() {
                   referrerPolicy="origin"
                 />
             </div>
+            {/* BUTTON SERVER */}
             <div className="grid grid-cols-12 mt-3">
               <div className="col-span-8 flex gap-2">
                 <ButtonServerComponent 
                   isServerVideo={isServerVideo}
+                  isServerAcitve={isServerAcitve}
+                  setServerActive={setServerActive}
                 />
               </div>
 
@@ -89,7 +96,7 @@ function PageDetailVideosComponent() {
               </div>
             </div>
             
-            <div className="grid grid-cols-12 mt-8">
+            <div className="grid grid-cols-12 my-10">
               <div className="col-span-12 md:col-start-7 md:col-span-6 flex flex-wrap justify-end">
                 <TagGenreDetailVideoComponent isDataGenre={isDetailVideos?.tags} />
               </div>
@@ -97,11 +104,18 @@ function PageDetailVideosComponent() {
 
           </div>
 
-          <div className="col-span-12 md:col-span-4 bg-adultdesu-backgroundbox py-3 px-5 rounded-sm">
-            <div className="grid grid-cols-1 text-adultdesu-navbartext">
+          <div className="col-span-12 md:col-span-4 bg-adultdesu-backgroundbox py-3 px-5 rounded-sm hidden md:block">
+            <div className="grid grid-cols-1">
+              <span className="text-adultdesu-navbartext underline underline-offset-2 decoration-adultdesu-navbartext my-5 text-lg">Related Videos</span>
               <RelatedCardVideoComponent />
             </div>
           </div>
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 my-7 duration-300 transition-transform bg-adultdesu-backgroundbox rounded-sm p-5">
+          <span className="text-lg text-adultdesu-navbartext underline underline-offset-2 decoration-adultdesu-navbartext">
+            New Videos
+          </span>
         </div>
       </div>
     </>
