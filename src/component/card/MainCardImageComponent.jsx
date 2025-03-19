@@ -8,9 +8,9 @@ import LoadingBar from "react-top-loading-bar";
 
 function MainCardImageComponent({ sendDataToParent }) {
   const [isProgressBar, setIsProgressBar] = useState(0);
+  const navigate = useNavigate();
   const [isContentVideos, setContentVideos] = useState(null);
   const [isLoading, setLoading] = useState(false);
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   
   useEffect(() => {
