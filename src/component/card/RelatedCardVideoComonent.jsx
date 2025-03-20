@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { mockApiRelatedVideoFilter } from '../../utils/mockAPI/mockAPIRelatedVideo';
 import LoadingBar from "react-top-loading-bar";
@@ -7,6 +7,8 @@ import LoadingBar from "react-top-loading-bar";
 function RelatedCardVideoComponent() {
   const [isRelatedVideo, setRelatedVideo] = useState([]);
   const [isProgressBar, setIsProgressBar] = useState(0);
+  const [isSlugBefore, setSlugBefore] = useState(null);
+  const { slug } = useParams();
   const navigate = useNavigate();
 
   const fetchRelatedVideos = async () => {
@@ -23,8 +25,15 @@ function RelatedCardVideoComponent() {
   }
 
   useEffect(() => {
-    fetchRelatedVideos();
-  }, [setRelatedVideo])
+    setSlugBefore((prev) => {
+      if (prev !== slug) {
+        fetchRelatedVideos();
+        return slug;
+      }
+      
+      return prev;
+    });
+  }, [setRelatedVideo, slug])
 
   const loadingBarState = async (dataNavigate) => {
     setIsProgressBar((prev) => prev + 40);
