@@ -7,6 +7,7 @@ import TagGenreDetailVideoComponent from "./feature/TagGenreDetailVideoComponent
 import { mockAPIDetailVideos } from '../utils/mockAPI/mockAPIDetailVideos';
 import ButtonServerComponent from "./feature/ButtonServerComponent";
 import NoVideoImage from '../component/assets/img/no-video.jpg';
+import NewVideoCardComponent from "./card/NewVideoCardComponent";
 
 const NoVideoImageComponent = () => {
   return (
@@ -63,48 +64,60 @@ function PageDetailVideosComponent() {
 
         <div className="grid grid-cols-12 gap-4">
 
-          <div className="col-span-12 md:col-span-8 bg-adultdesu-backgroundbox py-3 px-5 rounded-sm">
-            {/* IFRAME VIDEO */}
-            <div className="relative w-full pb-[56.25%] overflow-hidden rounded-sm">
-                <iframe
-                  src={!isServerAcitve ? isServerVideo[0] : isServerAcitve}
-                  title={isDetailVideos?.title}
-                  frameBorder="0"
-                  allowFullScreen
-                  className="absolute top-0 left-0 w-full h-full"
-                  referrerPolicy="origin"
-                />
-            </div>
-            {/* BUTTON SERVER */}
-            <div className="grid grid-cols-12 mt-3">
-              <div className="col-span-8 flex gap-2">
-                <ButtonServerComponent 
-                  isServerVideo={isServerVideo}
-                  isServerAcitve={isServerAcitve}
-                  setServerActive={setServerActive}
-                />
+          <div className="col-span-12 md:col-span-8 h-fit bg-transparent">
+            {/* BOX GRID UNTUK IFRAME */}
+            <div className="grid grid-cols-1 bg-adultdesu-backgroundbox py-3 px-5 rounded-sm">
+              {/* IFRAME VIDEO */}
+              <div className="relative w-full pb-[56.25%] overflow-hidden rounded-sm">
+                  <iframe
+                    src={!isServerAcitve ? isServerVideo[0] : isServerAcitve}
+                    title={isDetailVideos?.title}
+                    frameBorder="0"
+                    allowFullScreen
+                    className="absolute top-0 left-0 w-full h-full"
+                    referrerPolicy="origin"
+                  />
               </div>
+              {/* BUTTON SERVER */}
+              <div className="grid grid-cols-12 mt-3">
+                <div className="col-span-8 flex gap-2">
+                  <ButtonServerComponent 
+                    isServerVideo={isServerVideo}
+                    isServerAcitve={isServerAcitve}
+                    setServerActive={setServerActive}
+                  />
+                </div>
 
-              <div className="col-span-4">
-                <span className="flex justify-end text-gray-500 opacity-50 text-sm">
-                  <svg className="w-[18px] h-[18px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                  </svg>
+                <div className="col-span-4">
+                  <span className="flex justify-end text-gray-500 opacity-50 text-sm">
+                    <svg className="w-[18px] h-[18px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                    </svg>
 
-                  <span className="mx-2">{isDetailVideos?.duration}</span>
-                </span>
+                    <span className="mx-2">{isDetailVideos?.duration}</span>
+                  </span>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-12 mt-10 mb-5">
+                <div className="col-span-12 md:col-start-7 md:col-span-6 flex flex-wrap justify-end">
+                  <TagGenreDetailVideoComponent isDataGenre={isDetailVideos?.tags} />
+                </div>
               </div>
             </div>
-            
-            <div className="grid grid-cols-12 my-10">
-              <div className="col-span-12 md:col-start-7 md:col-span-6 flex flex-wrap justify-end">
-                <TagGenreDetailVideoComponent isDataGenre={isDetailVideos?.tags} />
+
+            <div className="grid grid-cols-1 gap-4 my-7 duration-300 transition-transform bg-adultdesu-backgroundbox rounded-sm p-5">
+              <span className="text-lg text-adultdesu-navbartext underline underline-offset-2 decoration-adultdesu-navbartext">
+                New Videos
+              </span>
+
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+                <NewVideoCardComponent />
               </div>
             </div>
-
           </div>
 
-          <div className="col-span-12 md:col-span-4 bg-adultdesu-backgroundbox py-3 px-5 rounded-sm hidden md:block">
+          <div className="col-span-12 md:col-span-4 h-fit bg-adultdesu-backgroundbox py-3 px-5 rounded-sm hidden md:block">
             <div className="grid grid-cols-1">
               <span className="text-adultdesu-navbartext underline underline-offset-2 decoration-adultdesu-navbartext my-5 text-lg">Related Videos</span>
               <RelatedCardVideoComponent />
@@ -112,11 +125,6 @@ function PageDetailVideosComponent() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 my-7 duration-300 transition-transform bg-adultdesu-backgroundbox rounded-sm p-5">
-          <span className="text-lg text-adultdesu-navbartext underline underline-offset-2 decoration-adultdesu-navbartext">
-            New Videos
-          </span>
-        </div>
       </div>
     </>
   );
