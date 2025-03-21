@@ -49,6 +49,7 @@ function NewVideoCardComponent() {
 
     setTimeout(() => {
       navigate(dataNavigate);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }, 100);
   }
 

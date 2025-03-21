@@ -55,6 +55,7 @@ function RelatedCardVideoComponent() {
     setTimeout(() => {
       navigate(dataNavigate);
       fetchRelatedVideos();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }, 100);
   }
 

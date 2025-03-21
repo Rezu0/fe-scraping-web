@@ -28,6 +28,7 @@ function NavbarComponent() {
       setTimeout(() => {
         setIsProgressBar((prev) => prev + 50);
         navigate(dataNavigate)
+        window.scrollTo({ top: 0, behavior: "smooth" });
         resolve()
       }, 500)
     })
