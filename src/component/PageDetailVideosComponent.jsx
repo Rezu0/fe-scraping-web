@@ -53,7 +53,7 @@ function PageDetailVideosComponent() {
         <meta name="keywords" content="streaming, 18+, bokep eropa, mia khalifa, bokep indonesia, video porno, adultdesu, adult, movie adult, netflix and chill, video eropa, video bokep, bokep streaming film dewasa, tontonan eksklusif, hiburan 18+, koleksi premium, video HD, film romantis, tayangan malam, video eksotis, streaming privat, konten khusus, film panas, adult streaming, video privat, nonton premium, film sensasi, hiburan malam, tontonan spesial, koleksi eksklusif, private movies, premium videos, film daring, tayangan khusus, high quality streaming, exclusive content, adult movies, entertainment 18+, private entertainment, premium collection"/>
         <title>{isDetailVideos?.title ? `Adultdesu - ${isDetailVideos.title}` : "Adultdesu - Streaming HD"}</title>
 
-        <link rel="canonical" href="https://www.example.com" />
+        <link rel="canonical" href="https://adultdesu.tv" />
       </Helmet>
       <div className="container mx-auto my-12">
         <div className="grid grid-cols-12 gap-4 mb-7 duration-300 transition-transform">
