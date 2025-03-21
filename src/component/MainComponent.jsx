@@ -14,6 +14,7 @@ function MainComponent() {
   const [isCardData, setCardData] = useState(null);
   const [isGenreTag, setGenreTag] = useState([]);
   const [isSortBy, setSortBy] = useState(null);
+  const [isSearch, setSearch] = useState(null);
 
   useEffect(() => {
     const pageFromQuery = isSearchParams.get('page');
@@ -25,8 +26,10 @@ function MainComponent() {
   useEffect(() => {
     const paramsQueryGenre = isSearchParams.get('genre');
     const paramsQuerySort = isSearchParams.get('sort');
+    const paramsQuerySearch = isSearchParams.get('search');
     setGenreTag(paramsQueryGenre ? paramsQueryGenre.split(',') : []);
     setSortBy(paramsQuerySort ? paramsQuerySort : null);
+    setSearch(paramsQuerySearch ? paramsQuerySearch : null);
 
   }, [isSearchParams])
 
@@ -39,6 +42,16 @@ function MainComponent() {
 
   const handleCardData = (data) => {
     setCardData(data);
+  }
+
+  const handlerClickClearSearch = () => {
+    setSearch(null);
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+      newParams.delete('search')
+      
+      return newParams;
+    })
   }
 
   return (
@@ -55,17 +68,33 @@ function MainComponent() {
         { isGenreTag?.map((item, index) => (
           <div 
             key={index}
-            className="bg-adultdesu-navbartext mx-1 text-xs py-2 px-3 rounded-lg"
+            className="flex items-center bg-adultdesu-navbartext mx-1 text-xs py-2 px-3 rounded-lg mt-2"
           >
             {item}
           </div>
         )) }
 
         <div className={classNames(
-          isSortBy ? 'inline-block' : 'hidden',
-          "bg-adultdesu-navbartext mx-1 text-xs py-2 px-3 rounded-lg"
+          isSortBy ? 'flex items-center' : 'hidden',
+          "bg-adultdesu-navbartext mx-1 text-xs py-2 px-3 rounded-lg mt-2"
         )}>
           Sort by: {isSortBy}
+        </div>
+
+        <div className={classNames(
+          isSearch ? 'flex items-center gap-2' : 'hidden',
+          "bg-adultdesu-navbartext mx-1 text-xs py-2 px-3 rounded-lg mt-2"
+        )}>
+          <span>Search: {isSearch}</span>
+          <button
+            type="button" 
+            className="cursor-pointer hover:bg-adultdesu-background-hover duration-300 p-1 rounded-sm flex items-center justify-center"
+            onClick={handlerClickClearSearch}
+          >
+            <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+          </button>
         </div>
       </div>
 

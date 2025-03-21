@@ -2,12 +2,15 @@ import { useState } from "react";
 import SidebarComponent from "./SidebarComponent";
 import { useNavigate } from "react-router-dom";
 import LoadingBar from "react-top-loading-bar";
+import SearchBoxComponent from "../feature/SearchBoxComponent";
 
 function NavbarComponent() {
   const [isSidebar, setIsSidebar] = useState(false);
+  const [isSearch, setIsSearch] = useState(false);
   const [isProgressBar, setIsProgressBar] = useState(0);
 
   const clickSidebarBurger = () => setIsSidebar((prev) => !prev);
+  const clickSearchIcon = () => setIsSearch((prev) => !prev);
   const navigate = useNavigate();
 
   // INI UNTUK ANIMASI TOP LOADINGBAR
@@ -43,6 +46,7 @@ function NavbarComponent() {
           {/* LOGO */}
             <div 
               className="text-adultdesu-navbartext text-2xl font-bold uppercase cursor-pointer"
+              onClick={() => loadingBarState('/')}
             >
               Adultdesu
             </div>
@@ -69,7 +73,7 @@ function NavbarComponent() {
           </ul>
 
           <div className="hidden lg:flex space-x-4">
-            <form className="flex items-center max-w-sm mx-auto">
+            <form className="flex items-center max-w-sm mx-auto w-full">
               <label htmlFor="search-adultdesu" className="sr-only">Search</label>
               <div className="relative w-full">
 
@@ -79,18 +83,35 @@ function NavbarComponent() {
                   </svg>
                 </div>
 
-                <input type="search" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 ps-10 p-2.5  dark:bg-gray-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-800" placeholder="Search your videos..."/>
+                <input 
+                  type="search" 
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 ps-10 p-2.5  dark:bg-gray-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-800" 
+                  placeholder="Search your videos..."
+                />
 
               </div>
             </form>
           </div>
 
-          <button 
-            className="lg:hidden text-white text-2xl cursor-pointer"
-            onClick={clickSidebarBurger}
-          >
-            &#9776;
-          </button>
+          <div className="flex flex-wrap gap-4 items-center lg:hidden">
+            {/* BUTTON SEARCH */}
+            <button 
+              className="lg:hidden text-white text-2xl cursor-pointer transition-transform active:scale-75"
+              onClick={clickSearchIcon}
+            >
+              <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+              </svg>
+            </button>
+
+            {/* BUTTON BURGER */}
+            <button 
+              className="lg:hidden text-white text-2xl cursor-pointer transition-transform active:scale-75"
+              onClick={clickSidebarBurger}
+            >
+              &#9776;
+            </button>
+          </div>
         </div>
 
         <SidebarComponent 
@@ -98,6 +119,10 @@ function NavbarComponent() {
           setIsSidebar={setIsSidebar}
         />
       </nav>
+
+      <SearchBoxComponent 
+        isSearch={isSearch}
+      />
     </>
   )
 }
