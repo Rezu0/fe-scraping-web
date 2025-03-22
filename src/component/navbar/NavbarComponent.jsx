@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SidebarComponent from "./SidebarComponent";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import LoadingBar from "react-top-loading-bar";
 import SearchBoxComponent from "../feature/SearchBoxComponent";
 
@@ -8,10 +8,29 @@ function NavbarComponent() {
   const [isSidebar, setIsSidebar] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
   const [isProgressBar, setIsProgressBar] = useState(0);
+  const [isSearchQuery, setSearchQuery] = useState("");
+  const [isSearchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const clickSidebarBurger = () => setIsSidebar((prev) => !prev);
   const clickSearchIcon = () => setIsSearch((prev) => !prev);
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isSearchParams.has('search')) {
+      setSearchQuery(isSearchParams.get('search'));
+    }
+
+    if (!isSearchParams.has('search')) {
+      setSearchQuery("");
+    }
+  }, [isSearch, isSearchParams]);
+
+  const handlerSearchSubmit = (e) => {
+    e.preventDefault();
+    if (isSearchQuery.trim() !== "") {
+      navigate(`?search=${encodeURIComponent(isSearchQuery)}`);
+    }
+  }
 
   // INI UNTUK ANIMASI TOP LOADINGBAR
   const loadingBarState = async (dataNavigate) => {
@@ -74,7 +93,10 @@ function NavbarComponent() {
           </ul>
 
           <div className="hidden lg:flex space-x-4">
-            <form className="flex items-center max-w-sm mx-auto w-full">
+            <form  
+              className="flex items-center max-w-sm mx-auto w-full"
+              onSubmit={handlerSearchSubmit}
+            >
               <label htmlFor="search-adultdesu" className="sr-only">Search</label>
               <div className="relative w-full">
 
@@ -88,6 +110,8 @@ function NavbarComponent() {
                   type="search" 
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 ps-10 p-2.5  dark:bg-gray-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-800" 
                   placeholder="Search your videos..."
+                  value={isSearchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                 />
 
               </div>

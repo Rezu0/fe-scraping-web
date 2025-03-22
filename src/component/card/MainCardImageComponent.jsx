@@ -20,7 +20,8 @@ function MainCardImageComponent({ sendDataToParent }) {
         const page = searchParams.get('page') ?? 1;
         const genreFilter = (searchParams.has('genre')) ? searchParams.get('genre').split(',') : '';
         const sortFilter = (searchParams.has('sort')) ? searchParams.get('sort') : '';
-        const response = await mockAPIVideos({ page: page, tags: genreFilter, sort: sortFilter });
+        const searchFilter = (searchParams.has('search')) ? searchParams.get('search') : '';
+        const response = await mockAPIVideos({ page: page, tags: genreFilter, sort: sortFilter, search: searchFilter });
         if (!response.status) toast(response.message);
 
         setContentVideos(response?.data);
