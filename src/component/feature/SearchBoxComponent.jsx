@@ -20,7 +20,7 @@ function SearchBoxComponent({ isSearch }) {
   const handlerSearchSubmit = (e) => {
     e.preventDefault(); // Mencegah reload halaman
     if (isSearchQuery.trim() !== "") {
-      navigate(`?search=${encodeURIComponent(isSearchQuery)}`);
+      navigate(`/?search=${encodeURIComponent(isSearchQuery)}`);
     }
   }
 

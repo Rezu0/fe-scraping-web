@@ -28,7 +28,7 @@ function NavbarComponent() {
   const handlerSearchSubmit = (e) => {
     e.preventDefault();
     if (isSearchQuery.trim() !== "") {
-      navigate(`?search=${encodeURIComponent(isSearchQuery)}`);
+      navigate(`/?search=${encodeURIComponent(isSearchQuery)}`);
     }
   }
 
