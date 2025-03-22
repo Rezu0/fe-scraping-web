@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Helmet } from "react-helmet-async";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import RelatedCardVideoComponent from "./card/RelatedCardVideoComonent";
 import TagGenreDetailVideoComponent from "./feature/TagGenreDetailVideoComponent";
 import { mockAPIDetailVideos } from '../utils/mockAPI/mockAPIDetailVideos';
@@ -17,6 +17,7 @@ const NoVideoImageComponent = () => {
 
 function PageDetailVideosComponent() {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const [isDetailVideos, setDetailVideos] = useState(null);
   const [isServerVideo, setServerVideo] = useState([]);
   const [isServerAcitve, setServerActive] = useState(null);
@@ -25,7 +26,9 @@ function PageDetailVideosComponent() {
     const fetchDetailVideos = async () => {
       try {
         const response = await mockAPIDetailVideos(slug);
-        if (!response.status) toast(response.message);
+        if (!response.status) {
+          navigate('/')
+        }
 
         setDetailVideos(response?.data);
         setServerVideo(
@@ -38,7 +41,7 @@ function PageDetailVideosComponent() {
     }
 
     fetchDetailVideos();
-  }, [slug])
+  }, [navigate, slug])
 
   return (
     <>
