@@ -4,6 +4,7 @@ import MainComponent from './component/MainComponent';
 
 import 'primeicons/primeicons.css';
 import PageDetailVideosComponent from './component/PageDetailVideosComponent';
+import TagCategoriesComponent from './component/card/TagCategoriesComponent';
         
 
 function App() {
@@ -19,6 +20,11 @@ function App() {
             <Route 
               index
               element={<MainComponent />}
+            />
+
+            <Route 
+              path='categories'
+              element={<TagCategoriesComponent />}
             />
 
           <Route 
