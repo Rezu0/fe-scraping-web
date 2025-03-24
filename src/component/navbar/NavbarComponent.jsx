@@ -85,9 +85,18 @@ function NavbarComponent() {
             <li>
               <a 
                 className="hover:text-adultdesu-navbartext hover:underline duration-500 cursor-pointer"
-                onClick={async () => await loadingBarState('categories')}
+                onClick={async () => await loadingBarState('/categories')}
               >
                 Categories
+              </a>
+            </li>
+            <li>
+              <a 
+                className="hover:text-adultdesu-navbartext hover:underline duration-500 cursor-pointer"
+                href="https://desu.bio/doujin"
+                target="_blank"
+              >
+                Comics Hentai
               </a>
             </li>
           </ul>
