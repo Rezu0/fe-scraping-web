@@ -54,6 +54,8 @@ function MainComponent() {
     })
   }
 
+  const textUppercase = (text) => text.charAt(0).toUpperCase() + text.slice(1);
+
   return (
     <>
       <FilterGlobalComponent />
@@ -70,7 +72,7 @@ function MainComponent() {
             key={index}
             className="flex items-center bg-adultdesu-navbartext mx-1 text-xs py-2 px-3 rounded-lg mt-2"
           >
-            {item}
+            {textUppercase(item)}
           </div>
         )) }
 
