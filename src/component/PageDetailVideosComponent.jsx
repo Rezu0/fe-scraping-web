@@ -109,7 +109,7 @@ function PageDetailVideosComponent() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-4 my-7 duration-300 transition-transform bg-adultdesu-backgroundbox rounded-sm p-5">
+            <div className="grid-cols-1 gap-4 my-7 duration-300 transition-transform bg-adultdesu-backgroundbox rounded-sm p-5 hidden md:grid">
               <span className="text-lg text-adultdesu-navbartext underline underline-offset-2 decoration-adultdesu-navbartext">
                 New Videos
               </span>
@@ -120,7 +120,7 @@ function PageDetailVideosComponent() {
             </div>
           </div>
 
-          <div className="col-span-12 md:col-span-4 h-fit bg-adultdesu-backgroundbox py-3 px-5 rounded-sm hidden md:block">
+          <div className="col-span-12 md:col-span-4 h-fit bg-adultdesu-backgroundbox py-3 px-5 rounded-sm">
             <div className="grid grid-cols-1">
               <span className="text-adultdesu-navbartext underline underline-offset-2 decoration-adultdesu-navbartext my-5 text-lg">Related Videos</span>
               <RelatedCardVideoComponent />
