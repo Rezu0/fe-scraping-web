@@ -5,6 +5,7 @@ import LoadingBar from "react-top-loading-bar";
 function FooterComponent() {
   const [isProgressBar, setIsProgressBar] = useState(0);
   const navigate = useNavigate();
+  const dateFooter = new Date().getFullYear()
 
   // UNTUK ANIMASI LOADING BAR
   const loadingBarState = async (dataNavigate) => {
@@ -79,7 +80,7 @@ function FooterComponent() {
             </ul>
           </div>
           <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-          <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" className="hover:underline">Adultdesu</a>. All Rights Reserved.</span>
+          <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© {dateFooter} <a href="https://flowbite.com/" className="hover:underline">Adultdesu</a>. All Rights Reserved.</span>
         </div>
       </footer>
     </>
