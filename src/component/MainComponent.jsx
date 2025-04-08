@@ -6,6 +6,8 @@ import FilterGlobalComponent from "./feature/FilterGlobalComponent";
 import MainCardImageComponent from "./card/MainCardImageComponent";
 import { formatNumber } from '../utils/number/handlerNumber';
 import { classNames } from "primereact/utils";
+import { mockAPIAsyncVideos } from "../utils/mockAPI/mockAPIVideos";
+import { toast } from "sonner";
 
 function MainComponent() {
   const [isSearchParams, setSearchParams] = useSearchParams();
@@ -33,6 +35,21 @@ function MainComponent() {
 
   }, [isSearchParams])
 
+  useEffect(() => {
+    const fetchAsyncVidoes = async () => {
+      try {
+        const response = await mockAPIAsyncVideos();
+        if (!response) toast(response.message);
+        return;
+    } catch (err) {
+      toast('An error occurred while fetching mock async Videos (err1 GET)');
+      return;
+    }
+    };
+
+    fetchAsyncVidoes();
+  }, []);
+
   const onPageChange = (event) => {
     isSearchParams.set('page', event.page + 1);
     setSearchParams(isSearchParams);
@@ -58,13 +75,43 @@ function MainComponent() {
 
   return (
     <>
-      <FilterGlobalComponent />
-
-      <div className="grid grid-cols-1 items-center gap-2">
+      {/* <div className="grid grid-cols-1 items-center gap-2">
         <div className="p-2 text-start uppercase text-adultdesu-navbartext text-lg md:text-2xl w-1/2">
           All Adultdesu HD Videos { formatNumber(isCardData?.totalData) }+
         </div>
+      </div> */}
+
+      <div className="grid grid-cols-1 bg-adultdesu-navbartext rounded-md px-2 my-5 md:px-4">
+        <div className="flex justify-between items-center">
+          
+          {/* Kiri: Icon + Teks */}
+          <div className="flex items-center gap-2 uppercase text-white text-sm font-semibold">
+            <svg 
+              width="24" height="24" viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+              className="text-white"
+            >
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+              <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+              <g id="SVGRepo_iconCarrier"> 
+                <g id="Layer_2" data-name="Layer 2"> 
+                  <g id="Layer_4" data-name="Layer 4"> 
+                    <g> 
+                      <path d="M2,42a3,3,0,0,0,3,3H43a3,3,0,0,0,3-3V36H2Z"></path> 
+                      <path d="M43,17H38.2l-2.8,8H36a2,2,0,0,1,2,2,1.7,1.7,0,0,1-.6,1.4A2,2,0,0,1,36,29H12a2,2,0,0,1-2-2,1.7,1.7,0,0,1,.6-1.4,2.3,2.3,0,0,1,1.2-.6L7.6,17H5a2.9,2.9,0,0,0-3,3V33H46V20A2.9,2.9,0,0,0,43,17Z"></path> 
+                      <path d="M14.8,25H32.5L38.9,5.6a2.1,2.1,0,0,0-.6-2.2A2,2,0,0,0,36,3.3L29.6,7.5a4.4,4.4,0,0,1-4.9-.3l-.6-.4a7.9,7.9,0,0,0-10.6.7L9.6,12.1a2,2,0,0,0-.4,2.3Z"></path> 
+                    </g> 
+                  </g> 
+                </g>
+              </g>
+            </svg>
+            <span className="text-md lg:text-lg md:text-base">Daftar Semua</span>
+          </div>
+
+          {/* Kanan: Komponen filter */}
+          <FilterGlobalComponent />
+        </div>
       </div>
+
 
       <div className="flex flex-wrap justify-end my-5">
         { isGenreTag?.map((item, index) => (

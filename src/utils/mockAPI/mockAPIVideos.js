@@ -18,3 +18,22 @@ export async function mockAPIVideos({ limit = '', page = '', tags = '', sort = '
     throw err;
   }
 }
+
+export async function mockAPIAsyncVideos() {
+  try {
+    const requestOptions = {
+      method: 'GET',
+      redirect: 'follow',
+    };
+
+    const fetchingApi = await fetch(`${API_URL}/v1/xtape/sync/videos`, requestOptions);
+    const responseData = await fetchingApi.json();
+
+    if (responseData.status === 'fail' || responseData.status === 'error') return { status: false, message: responseData.message };
+
+    return responseData;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
