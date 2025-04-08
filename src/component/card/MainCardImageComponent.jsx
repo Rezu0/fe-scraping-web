@@ -91,7 +91,7 @@ function MainCardImageComponent({ sendDataToParent }) {
     
               {/* Konten di Bawah Gambar */}
               <div className="py-1">
-                <h3 className="text-md font-semibold text-adultdesu-navbartext line-clamp-2 group-hover:underline duration-300 cursor-pointer">{item.title}</h3>
+                <h3 className="text-md font-semibold text-adultdesu-navbartext group-hover:underline duration-300 cursor-pointer line-clamp-1">{item.title}</h3>
                 <p className="text-sm text-gray-500 no-underline">{formatDateToString(item.created)}</p>
                 <p className="text-sm text-gray-500 no-underline">{ item.duration }</p>
               </div>
