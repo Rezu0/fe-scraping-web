@@ -4,6 +4,9 @@
   --color-adultdesu-navbartext: #E97991;
   --color-adultdesu-backgroundbox: #181818;
   --color-adultdesu-background-hover: #e34265;
+  --color-adutldesu-dark-hover: #2b2b2b;
+  --color-adultdesu-backgroundfooter: #1c1c1c;
+  --text-size-super-xs: 9px;
 }
 
 @layer utilities {
