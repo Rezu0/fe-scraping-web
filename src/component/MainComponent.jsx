@@ -75,13 +75,7 @@ function MainComponent() {
 
   return (
     <>
-      {/* <div className="grid grid-cols-1 items-center gap-2">
-        <div className="p-2 text-start uppercase text-adultdesu-navbartext text-lg md:text-2xl w-1/2">
-          All Adultdesu HD Videos { formatNumber(isCardData?.totalData) }+
-        </div>
-      </div> */}
-
-      <div className="grid grid-cols-1 bg-adultdesu-navbartext rounded-md px-2 my-5 md:px-4">
+      <div className="grid grid-cols-1 bg-adultdesu-navbartext rounded-md px-2 mt-15 md:px-4">
         <div className="flex justify-between items-center">
           
           {/* Kiri: Icon + Teks */}
