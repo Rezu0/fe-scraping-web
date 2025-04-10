@@ -3,6 +3,7 @@ import { mockAPIVideos } from "../../utils/mockAPI/mockAPIVideos";
 import { formatDateToString } from '../../utils/date/handlerDate';
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
+import LogoBraz from '../assets/img/braz.png';
 
 import LoadingBar from "react-top-loading-bar";
 
@@ -92,8 +93,13 @@ function MainCardImageComponent({ sendDataToParent }) {
               {/* Konten di Bawah Gambar */}
               <div className="py-1">
                 <h3 className="text-md font-semibold text-adultdesu-navbartext group-hover:underline duration-300 cursor-pointer line-clamp-1">{item.title}</h3>
-                <p className="text-sm text-gray-500 no-underline">{formatDateToString(item.created)}</p>
-                <p className="text-sm text-gray-500 no-underline">{ item.duration }</p>
+
+                <div className="flex justify-between">
+                  <p className="text-sm text-gray-500 no-underline">
+                    <img src={LogoBraz} alt="Logo Brazzers" className="w-20 h-auto" />
+                  </p>
+                  <p className="text-sm text-gray-500 no-underline">{ item.duration }</p>
+                </div>
               </div>
             </div>
           ))
