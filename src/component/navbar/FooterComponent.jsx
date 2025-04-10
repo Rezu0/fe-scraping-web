@@ -46,7 +46,7 @@ function FooterComponent() {
   return (
     <>
       <LoadingBar 
-        color="#E97991"
+        color="#ad1320"
         progress={isProgressBar}
         onLoaderFinished={() => setIsProgressBar(0)}
       />
@@ -63,13 +63,25 @@ function FooterComponent() {
               </span>
             ))
           }
-          <a href="https://desu.bio/doujin/" className="cursor-pointer">
+          <a 
+            href="https://desu.bio/doujin" 
+            className="cursor-pointer"
+            target="_blank"
+          >
             Comics Hentai
           </a>
-          <a href="https://desu.bio/jav/" className="cursor-pointer">
+          <a 
+            href="https://desu.bio/jav" 
+            className="cursor-pointer"
+            target="_blank"
+          >
             Jav
           </a>
-          <a href="https://desu.bio/igo/" className="cursor-pointer">
+          <a 
+            href="https://igodesu.tv/" 
+            className="cursor-pointer"
+            target="_blank"
+          >
             Bokep Indo
           </a>
         </div>
