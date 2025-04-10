@@ -62,7 +62,7 @@ function RelatedCardVideoComponent() {
   return (
     <div className="grid grid-cols-12 gap-3">
       <LoadingBar 
-        color="#E97991"
+        color="#ad1320"
         progress={isProgressBar}
         onLoaderFinished={() => setIsProgressBar(0)}
       />

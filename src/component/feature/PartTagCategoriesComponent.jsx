@@ -35,7 +35,7 @@ function PartTagCategoriesComponent({ title }) {
   return (
     <>
       <LoadingBar 
-        color="#E97991"
+        color="#ad1320"
         progress={isProgressBar}
         onLoaderFinished={() => setIsProgressBar(0)}
       />
