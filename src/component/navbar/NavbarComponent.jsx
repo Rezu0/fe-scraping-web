@@ -188,8 +188,6 @@ function NavbarComponent() {
             </div>
           </div>
 
-
-
           {/* MOBILE: ICONS */}
           <div className="col-span-3 lg:hidden flex justify-end gap-4">
             <button 
