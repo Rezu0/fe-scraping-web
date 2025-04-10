@@ -55,6 +55,10 @@ function MainComponent() {
     setSearchParams(isSearchParams);
     setFirst(event.first);
     setRows(event.rows);
+    
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }, 300)
   };
 
   const handleCardData = (data) => {
